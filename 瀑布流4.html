@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.wrap{
+				width: 800px;
+				margin: 0 auto;
+				border: 1px solid red;
+				overflow: hidden;
+			}
+			.wrap ul{
+				float: left;
+				width: 200px;
+				/*border: 1px solid green;*/
+				list-style: none;
+				padding: 10px;
+				box-sizing: border-box;
+			}
+			.wrap ul li{
+				background-color: #ccc;
+				margin-bottom: 20px;
+				font-size: 50px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap" class="wrap">
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function randFn(min,max){
+			return parseInt(Math.random()*(max-min))+min;
+		}
+		var wrap = document.getElementById("wrap");
+		var uls = wrap.getElementsByTagName("ul");
+		
+		var num = 0;
+		
+		function createLi(){
+			for (var i=0; i<20; i++){
+			
+				var li = document.createElement("li");
+				num++;
+				li.innerHTML = num;
+				var h = randFn(100,300);
+				
+				li.style.height = h+"px";
+				
+				var arrH = [];
+				
+				for (var j = 0; j<uls.length; j++){
+					
+					arrH.push(uls[j].offsetHeight);
+				}
+				
+				var min = arrH[0];
+				var minIndex =0;
+				for (var j=0; j<uls.length; j++){
+					
+					if (min>arrH[j]){
+						min = arrH[j];
+						minIndex = j;
+					}
+				}
+	//			alert(minIndex);
+				uls[minIndex].appendChild(li);
+				
+			}
+		}
+		
+		createLi();
+		
+		window.onscroll = function (){
+			
+			//1.获取可视区高度
+			var windowHeight = document.documentElement.clientHeight;
+//			alert(document.documentElement.clientHeight);
+			//2.获取文档的内容高度
+			var bodyHeight = document.documentElement.offsetHeight;
+//			alert(document.documentElement.offsetHeight);
+			var scrollMaxHeight = bodyHeight-windowHeight;
+			
+			var scrollTop = document.body.scrollTop;
+			
+			if (scrollTop==scrollMaxHeight){
+				createLi();
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+	</script>
+</html>

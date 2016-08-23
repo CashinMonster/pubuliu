@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function a(index,b){//index = 0;
+			index+=5;//index = 5;
+			alert(index);
+			b(index);//->回调函数: 在函数内部被调用的函数
+		}
+		var index = 0;
+		a(index,function (index){
+			index-=2;
+			alert(index);
+		});
+	</script>
+</html>
